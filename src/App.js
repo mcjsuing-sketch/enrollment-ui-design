@@ -6,32 +6,57 @@ function App() {
   const [department, setDepartment] = useState("");
   const [degree, setDegree] = useState("");
 
-  // ================= PROGRAM DATA =================
+  // ================= COUNTRY LIST (ALL RECOGNIZED COUNTRIES) =================
+  const countries = [
+    "Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda",
+    "Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain",
+    "Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan",
+    "Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria",
+    "Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada",
+    "Central African Republic","Chad","Chile","China","Colombia","Comoros",
+    "Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic",
+    "Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt",
+    "El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia",
+    "Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana",
+    "Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti",
+    "Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland",
+    "Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati",
+    "Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia",
+    "Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi",
+    "Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania",
+    "Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia",
+    "Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal",
+    "Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea",
+    "North Macedonia","Norway","Oman","Pakistan","Palau","Panama",
+    "Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal",
+    "Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia",
+    "Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe",
+    "Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore",
+    "Slovakia","Slovenia","Solomon Islands","Somalia","South Africa",
+    "South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname",
+    "Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania",
+    "Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia",
+    "Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates",
+    "United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu",
+    "Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
+  ];
 
+  // ================= PROGRAM DATA =================
   const undergraduatePrograms = {
     "College of Engineering and Architecture": [
-      "BS Architecture",
-      "BS Chemical Engineering",
-      "BS Civil Engineering",
-      "BS Computer Engineering",
-      "BS Electrical Engineering",
-      "BS Electronics Engineering",
-      "BS Industrial Engineering",
+      "BS Architecture","BS Chemical Engineering","BS Civil Engineering",
+      "BS Computer Engineering","BS Electrical Engineering",
+      "BS Electronics Engineering","BS Industrial Engineering",
       "BS Mechanical Engineering",
     ],
     "College of Computer Studies": [
-      "BS Computer Science",
-      "BS Data Science and Analytics",
-      "BS Entertainment and Multimedia Computing",
-      "BS Information Technology",
+      "BS Computer Science","BS Data Science and Analytics",
+      "BS Entertainment and Multimedia Computing","BS Information Technology",
     ],
     "College of Business Education": [
-      "BS Accountancy",
-      "BS Accounting Information System",
-      "BS Business Administration",
-      "Financial Management",
-      "Human Resource Management",
-      "Logistics and Supply Chain Management",
+      "BS Accountancy","BS Accounting Information System",
+      "BS Business Administration","Financial Management",
+      "Human Resource Management","Logistics and Supply Chain Management",
       "Marketing Management",
     ],
     "College of Arts": [
@@ -47,8 +72,7 @@ function App() {
       "Doctor of Philosophy in Computer Science",
     ],
     "Master's Degrees": [
-      "Master in Information Systems",
-      "Master in Information Technology",
+      "Master in Information Systems","Master in Information Technology",
       "Master in Logistics and Supply Chain Management",
       "Master of Engineering (Civil Engineering)",
       "Master of Engineering (Computer Engineering)",
@@ -61,12 +85,10 @@ function App() {
   };
 
   const getPrograms = () => {
-    if (level === "Undergraduate" && department) {
+    if (level === "Undergraduate" && department)
       return undergraduatePrograms[department] || [];
-    }
-    if (level === "Graduate" && department) {
+    if (level === "Graduate" && department)
       return graduatePrograms[department] || [];
-    }
     return [];
   };
 
@@ -81,22 +103,10 @@ function App() {
           <legend>Personal Information</legend>
 
           <div className="grid-4">
-            <div>
-              <label>First Name</label>
-              <input type="text" required />
-            </div>
-            <div>
-              <label>Middle Name</label>
-              <input type="text" />
-            </div>
-            <div>
-              <label>Last Name</label>
-              <input type="text" required />
-            </div>
-            <div>
-              <label>Suffix</label>
-              <input type="text" />
-            </div>
+            <div><label>First Name</label><input type="text" required /></div>
+            <div><label>Middle Name</label><input type="text" /></div>
+            <div><label>Last Name</label><input type="text" required /></div>
+            <div><label>Suffix</label><input type="text" /></div>
           </div>
 
           <div className="grid-3">
@@ -118,69 +128,44 @@ function App() {
             <div>
               <label>Nationality</label>
               <select required>
-                <option value="">Select</option>
-                <option>Filipino</option>
-                <option>American</option>
-                <option>Other</option>
+                <option value="">Select Country</option>
+                {countries.map((country) => (
+                  <option key={country}>{country}</option>
+                ))}
               </select>
             </div>
           </div>
         </fieldset>
 
-        {/* ================= ACADEMIC HISTORY ================= */}
+        {/* ================= CONTACT DETAILS ================= */}
         <fieldset>
-          <legend>Academic History</legend>
+          <legend>Contact Details</legend>
 
-          <h3>Grade School</h3>
-          <div className="grid-3">
+          <div className="grid-2">
             <div>
-              <label>Grade School Name</label>
-              <input type="text" required />
+              <label>Email Address</label>
+              <input type="email" required />
             </div>
             <div>
-              <label>Year Graduated</label>
-              <input type="number" min="1900" max="2026" required />
-            </div>
-            <div>
-              <label>Grade School Address</label>
-              <input type="text" required />
+              <label>Mobile Number</label>
+              <input type="tel" required />
             </div>
           </div>
 
-          <h3>Junior High School</h3>
-          <div className="grid-3">
+          <div className="grid-2">
             <div>
-              <label>Junior High School Name</label>
-              <input type="text" required />
-            </div>
-            <div>
-              <label>Year Graduated</label>
-              <input type="number" min="1900" max="2026" required />
-            </div>
-            <div>
-              <label>Junior High School Address</label>
-              <input type="text" required />
+              <label>Landline</label>
+              <input type="tel" />
             </div>
           </div>
 
-          <h3>Senior High School</h3>
-          <div className="grid-4">
-            <div>
-              <label>Senior High School Name</label>
-              <input type="text" required />
-            </div>
-            <div>
-              <label>Year Graduated</label>
-              <input type="number" min="1900" max="2026" required />
-            </div>
-            <div>
-              <label>Grade Average</label>
-              <input type="number" step="0.01" min="0" max="100" required />
-            </div>
-            <div>
-              <label>Senior High School Address</label>
-              <input type="text" required />
-            </div>
+          <h3>Complete Home Address</h3>
+          <div className="grid-3">
+            <div><label>Street</label><input type="text" required /></div>
+            <div><label>Barangay</label><input type="text" required /></div>
+            <div><label>City</label><input type="text" required /></div>
+            <div><label>Province</label><input type="text" required /></div>
+            <div><label>Zip Code</label><input type="text" required /></div>
           </div>
         </fieldset>
 
@@ -188,42 +173,22 @@ function App() {
         <fieldset>
           <legend>Enrollment Choices</legend>
 
-          {/* Academic Level */}
           <div>
             <label>Academic Level</label>
             <div className="radio-group">
               <label>
-                <input
-                  type="radio"
-                  name="level"
-                  value="Undergraduate"
-                  required
-                  onChange={(e) => {
-                    setLevel(e.target.value);
-                    setDepartment("");
-                    setDegree("");
-                  }}
-                />
+                <input type="radio" name="level" value="Undergraduate" required
+                  onChange={(e)=>{setLevel(e.target.value);setDepartment("");setDegree("");}}/>
                 Undergraduate
               </label>
-
               <label>
-                <input
-                  type="radio"
-                  name="level"
-                  value="Graduate"
-                  onChange={(e) => {
-                    setLevel(e.target.value);
-                    setDepartment("");
-                    setDegree("");
-                  }}
-                />
+                <input type="radio" name="level" value="Graduate"
+                  onChange={(e)=>{setLevel(e.target.value);setDepartment("");setDegree("");}}/>
                 Graduate
               </label>
             </div>
           </div>
 
-          {/* Semester */}
           <div>
             <label>Semester</label>
             <div className="radio-group">
@@ -232,7 +197,6 @@ function App() {
             </div>
           </div>
 
-          {/* Campus */}
           <div>
             <label>Campus</label>
             <div className="radio-group">
@@ -241,20 +205,13 @@ function App() {
             </div>
           </div>
 
-          {/* Department Dropdown */}
           {level === "Undergraduate" && (
             <div>
               <label>College Department</label>
-              <select
-                value={department}
-                required
-                onChange={(e) => {
-                  setDepartment(e.target.value);
-                  setDegree("");
-                }}
-              >
+              <select value={department} required
+                onChange={(e)=>{setDepartment(e.target.value);setDegree("");}}>
                 <option value="">Select Department</option>
-                {Object.keys(undergraduatePrograms).map((dept) => (
+                {Object.keys(undergraduatePrograms).map((dept)=>(
                   <option key={dept}>{dept}</option>
                 ))}
               </select>
@@ -264,33 +221,23 @@ function App() {
           {level === "Graduate" && (
             <div>
               <label>Graduate Category</label>
-              <select
-                value={department}
-                required
-                onChange={(e) => {
-                  setDepartment(e.target.value);
-                  setDegree("");
-                }}
-              >
+              <select value={department} required
+                onChange={(e)=>{setDepartment(e.target.value);setDegree("");}}>
                 <option value="">Select Category</option>
-                {Object.keys(graduatePrograms).map((dept) => (
+                {Object.keys(graduatePrograms).map((dept)=>(
                   <option key={dept}>{dept}</option>
                 ))}
               </select>
             </div>
           )}
 
-          {/* Degree Program */}
           {department && (
             <div>
               <label>Degree Program</label>
-              <select
-                value={degree}
-                required
-                onChange={(e) => setDegree(e.target.value)}
-              >
+              <select value={degree} required
+                onChange={(e)=>setDegree(e.target.value)}>
                 <option value="">Select Degree</option>
-                {getPrograms().map((prog) => (
+                {getPrograms().map((prog)=>(
                   <option key={prog}>{prog}</option>
                 ))}
               </select>
@@ -299,7 +246,6 @@ function App() {
         </fieldset>
 
         <button type="submit">Submit Registration</button>
-
       </form>
     </div>
   );
