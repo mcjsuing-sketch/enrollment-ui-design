@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import logo from "./Logo_Suing.png.png";
+
 
 function App() {
   const [level, setLevel] = useState("");
@@ -94,7 +96,10 @@ function App() {
 
   return (
     <div className="container">
-      <h1>ADEi University Digital Registrar</h1>
+      <div className="header">
+  <img src={logo} alt="University Logo" className="logo" />
+  <h1>Suing University Digital Registrar</h1>
+</div>
 
       <form>
 

@@ -94,3 +94,17 @@ button:hover {
     grid-template-columns: 1fr;
   }
 }
+/* HEADER WITH LOGO */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
